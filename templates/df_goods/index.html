@@ -1,0 +1,277 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>军品行-首页</title>
+	<link rel="stylesheet" type="text/css" href="/static/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/main.css">
+	<script type="text/javascript" src="/static/js/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript" src="/static/js/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="/static/js/slide.js"></script>
+    <script type="text/javascript">
+
+	</script>
+
+</head>
+<body background="/static/images/bizhi.jpeg">
+	<div class="header_con">
+		<div class="header">
+			<div class="welcome fl">欢迎来到军品行!</div>
+			<div class="fr">
+				<div class="login_btn fl">
+                    {% if uname %}
+                        <span class="denglu" name="login">欢迎您：{{ uname }}</span>
+                        <a href="/user/sign_out/">退出</a>
+                    {% else %}
+                        <a href="/user/login/">登录</a>
+                    {% endif %}
+					<span>|</span>
+					<a href="/user/register/">注册</a>
+				</div>
+				<div class="user_link fl">
+					<span>|</span>
+					<a href="/user/user_center_info">用户中心</a>
+					<span>|</span>
+					<a href="/shoppingCar/">我的购物车</a>
+					<span>|</span>
+					<a href="/order/orderinfo/">我的订单</a>
+				</div>
+			</div>
+		</div>		
+	</div>
+
+	<div class="search_bar clearfix">
+		<a href="/" class="logo fl"><img src="/static/images/tig.jpg"></a>
+		<div class="search_con fl">
+            <form method='get' action="/search/" target="_blank">
+			<input type="text" class="input_text fl" name="q" placeholder="搜索商品">
+			<input type="submit" class="input_btn fr" name="" value="搜索">
+            </form>
+		</div>
+		<div class="guest_cart fr">
+            <div></div>
+			<a href="/shoppingCar/" class="cart_name fl">我的购物车</a>
+			<div class="goods_count fl" id="show_count">0</div>
+		</div>
+	</div>
+
+	<div class="navbar_con">
+		<div class="navbar">
+			<h1 class="fl">全部商品分类</h1>
+			</ul>
+		</div>
+	</div>
+
+	<div class="center_con clearfix">
+		<ul class="subnav fl">
+			<li><a href="#model01" class="fruit">战术上衣</a></li>
+			<li><a href="#model02" class="seafood">战术裤装</a></li>
+			<li><a href="#model03" class="meet">特战鞋靴</a></li>
+			<li><a href="#model04" class="egg">军用手表</a></li>
+			<li><a href="#model05" class="vegetables">战术包具</a></li>
+			<li><a href="#model06" class="ice">战术配饰</a></li>
+		</ul>
+		<div class="slide fl">
+			<ul class="slide_pics">
+				<li><img src="/static/images/lunbo1.jpg" alt="幻灯片"></li>
+				<li><img src="/static/images/lunbo2.jpg" alt="幻灯片"></li>
+				<li><img src="/static/images/lunbo3.jpg" alt="幻灯片"></li>
+				<li><img src="/static/images/lunbo4.jpg" alt="幻灯片"></li>
+			</ul>
+			<div class="prev"></div>
+			<div class="next"></div>
+			<ul class="points"></ul>
+		</div>
+		<div class="adv fl">
+			<a href="#"><img src="/static/images/右1.png"></a>
+			<a href="#"><img src="/static/images/右2.png"></a>
+		</div>
+	</div>
+
+	<div class="list_model">
+		<div class="list_title clearfix">
+			<h3 class="fl" id="model01">战术上衣</h3>
+			<div class="subtitle fl">
+				<span>|</span>
+                {% for g in type01 %}
+				<a href="/{{g.id}}">{{g.gtitle}}</a>
+                {% endfor %}
+			</div>
+			<a href="#" class="goods_more fr" id="fruit_more">查看更多 ></a>
+		</div>
+
+		<div class="goods_con clearfix">
+			<div class="goods_banner fl"><img src="/static/images/left_上衣.jpg"></div>
+			<ul class="goods_list fl">
+				{% for g in type0 %}
+                <li>
+					<h4><a href="/{{ g.id }}">{{ g.gtitle }}</a></h4>
+					<a href="/{{ g.id }}"><img src="/static/{{ g.gpic }}"></a>
+					<div class="prize">¥ {{ g.gprice }}</div>
+				</li>
+                {% endfor %}
+			</ul>
+		</div>
+	</div>
+
+	<div class="list_model">
+		<div class="list_title clearfix">
+			<h3 class="fl" id="model02">战术裤装</h3>
+			<div class="subtitle fl">
+				<span>|</span>
+				{% for g in type11 %}
+				<a href="/{{g.id}}">{{g.gtitle}}</a>
+                {% endfor %}
+			</div>
+			<a href="#" class="goods_more fr" id="fruit_more">查看更多 ></a>
+		</div>
+
+		<div class="goods_con clearfix">
+			<div class="goods_banner fl"><img src="/static/images/left_kuzi.jpg"></div>
+			<ul class="goods_list fl">
+				{% for g in type1 %}
+                <li>
+					<h4><a href="/{{ g.id }}">{{ g.gtitle }}</a></h4>
+					<a href="/{{ g.id }}"><img src="/static/{{ g.gpic }}"></a>
+					<div class="prize">¥ {{ g.gprice }}</div>
+				</li>
+                {% endfor %}
+			</ul>
+		</div>
+	</div>
+
+	<div class="list_model">
+		<div class="list_title clearfix">
+			<h3 class="fl" id="model03">特战鞋靴</h3>
+			<div class="subtitle fl">
+				{% for g in type21 %}
+				<a href="/{{g.id}}">{{g.gtitle}}</a>
+                {% endfor %}
+			</div>
+			<a href="#" class="goods_more fr" id="fruit_more">查看更多 ></a>
+		</div>
+
+		<div class="goods_con clearfix">
+			<div class="goods_banner fl"><img src="/static/images/left_xiezi.jpg"></div>
+			<ul class="goods_list fl">
+				{% for g in type2 %}
+                <li>
+					<h4><a href="/{{ g.id }}">{{ g.gtitle }}</a></h4>
+					<a href="/{{ g.id }}"><img src="/static/{{ g.gpic }}"></a>
+					<div class="prize">¥ {{ g.gprice }}</div>
+				</li>
+                {% endfor %}
+			</ul>
+		</div>
+	</div>
+
+	<div class="list_model">
+		<div class="list_title clearfix">
+			<h3 class="fl" id="model04">军用手表</h3>
+			<div class="subtitle fl">
+				<span>|</span>
+				{% for g in type31 %}
+				<a href="/{{g.id}}">{{g.gtitle}}</a>
+                {% endfor %}
+			</div>
+			<a href="#" class="goods_more fr" id="fruit_more">查看更多 ></a>
+		</div>
+
+		<div class="goods_con clearfix">
+			<div class="goods_banner fl"><img src="/static/images/left_shoubiao.jpg"></div>
+			<ul class="goods_list fl">
+				{% for g in type3 %}
+                <li>
+					<h4><a href="/{{ g.id }}">{{ g.gtitle }}</a></h4>
+					<a href="/{{ g.id }}"><img src="/static/{{ g.gpic }}"></a>
+					<div class="prize">¥ {{ g.gprice }}</div>
+				</li>
+                {% endfor %}
+			</ul>
+		</div>
+	</div>
+
+	<div class="list_model">
+		<div class="list_title clearfix">
+			<h3 class="fl" id="model05">战术包具</h3>
+			<div class="subtitle fl">
+				<span>|</span>
+				{% for g in type41 %}
+				<a href="/{{g.id}}">{{g.gtitle}}</a>
+                {% endfor %}
+			</div>
+			<a href="#" class="goods_more fr" id="fruit_more">查看更多 ></a>
+		</div>
+
+		<div class="goods_con clearfix">
+			<div class="goods_banner fl"><img src="/static/images/left_baoju.jpg"></div>
+			<ul class="goods_list fl">
+				{% for g in type4 %}
+                <li>
+					<h4><a href="/{{ g.id }}">{{ g.gtitle }}</a></h4>
+					<a href="/{{ g.id }}"><img src="/static/{{ g.gpic }}"></a>
+					<div class="prize">¥ {{ g.gprice }}</div>
+				</li>
+                {% endfor %}
+			</ul>
+		</div>
+	</div>
+
+	<div class="list_model">
+		<div class="list_title clearfix">
+			<h3 class="fl" id="model06">战术配饰</h3>
+			<div class="subtitle fl">
+				<span>|</span>
+				{% for g in type51 %}
+				<a href="/{{g.id}}">{{g.gtitle}}</a>
+                {% endfor %}
+			</div>
+			<a href="#" class="goods_more fr" id="fruit_more">查看更多 ></a>
+		</div>
+
+		<div class="goods_con clearfix">
+			<div class="goods_banner fl"><img src="/static/images/left_peishi.jpg"></div>
+			<ul class="goods_list fl">
+				{% for g in type5 %}
+                <li>
+					<h4><a href="/{{ g.id }}">{{ g.gtitle }}</a></h4>
+					<a href="/{{ g.id }}"><img src="/static/{{ g.gpic }}"></a>
+					<div class="prize">¥ {{ g.gprice }}</div>
+				</li>
+                {% endfor %}
+			</ul>
+		</div>
+	</div>
+
+	<div class="footer">
+		<div class="foot_link">
+			<a href="#">关于我们</a>
+			<span>|</span>
+			<a href="#">联系我们</a>
+			<span>|</span>
+			<a href="#">招聘人才</a>
+			<span>|</span>
+			<a href="#">友情链接</a>		
+		</div>
+		<p>CopyRight © 2016 北京军品行有限公司 All Rights Reserved</p>
+		<p>电话：010-****888    京ICP备*******8号</p>
+	</div>
+	<script type="text/javascript" src="/static/js/slideshow.js"></script>
+	<script type="text/javascript">
+		BCSlideshow('focuspic');
+		var oFruit = document.getElementById('fruit_more');
+		var oShownum = document.getElementById('show_count');
+
+		var hasorder = localStorage.getItem('order_finish');
+
+		if(hasorder)
+		{
+			oShownum.innerHTML = '2';
+		}
+
+		oFruit.onclick = function(){
+			window.location.href = 'list.html';
+		}
+	</script>
+</body>
+</html>

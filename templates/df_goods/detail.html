@@ -1,0 +1,264 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>军品行-商品详情</title>
+	<link rel="stylesheet" type="text/css" href="/static/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/main.css">
+    <script type="text/javascript" src="/static/js/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="/static/js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/static/jquery-3.3.1.js"></script>
+	<!--<script type="text/javascript" src="/static/shoppingCar/js/cart.js"></script>-->
+    <script>
+		$(document).ready(function(){
+			var gprice = parseFloat($("#gprice").text());
+			$('.num_show').val(1);
+			var count = $(".num_show").val();
+			var totalprice = (gprice*count).toFixed(2) + '元';
+			$("#gtotal").text(totalprice);
+		    });
+
+        function add() {
+            num=parseFloat($('.num_show').val());
+            $('.num_show').val(num+1);
+            $('.num_show').blur();
+            var gprice = parseFloat($("#gprice").text());
+			var count = $(".num_show").val();
+			var totalprice = (gprice*count).toFixed(2) + '元';
+			$("#gtotal").text(totalprice)
+        }
+        function minus(){
+
+            num=parseFloat($('.num_show').val());
+            if(num){
+				$('.num_show').val(num-1);
+				$('.num_show').blur();
+				var gprice = parseFloat($("#gprice").text());
+				var count = $(".num_show").val();
+				var totalprice = (gprice*count).toFixed(2) + '元';
+				$("#gtotal").text(totalprice);
+			}
+        }
+        function addcar(){
+            num=parseFloat($('.num_show').val());
+            pdgid=$('.pdgid').val();
+            $.post("/shoppingCar/addcar/"+pdgid+'/',
+            {'num':num},
+            function (data) {
+            if(data.status == "nologin"){
+                window.location.href = location.protocol+"//"+location.hostname+':'+location.port+"/user/login"
+            }
+            }
+        )
+        }
+
+        function buynow() {
+            num=parseFloat($('.num_show').val());
+            pdgid=$('.pdgid').val();
+            window.location.href = location.protocol+"//"+
+                location.hostname+':'+location.port+"/shoppingCar/buyNow"+
+                    "?pdId="+pdgid+"&num="+num
+        }
+
+
+
+//        $(funtion(){
+//            $('.num_show').blur(function(){
+//                num =parseFloat($('.num_show').val());
+//                price=parseFloat($('#gprice').text());
+//                total=num*price;
+//                $('#gtotal').text(total.toFixed(2)+'元');
+//            });
+//        });
+
+
+
+    </script>
+
+    <script type="text/javascript">
+        $(function(){
+	    $(".login_btn p").hide();
+	    $(".login_btn .denglu").eq(0).show();
+	});
+	</script>
+</head>
+<body>
+	<div class="header_con">
+		<div class="header">
+			<div class="welcome fl">欢迎来到军品行!</div>
+			<div class="fr">
+				<div class="login_info fl">
+				</div>
+				<div class="login_btn fl">
+                    {% if uname %}
+                        <span class="denglu" name="login">欢迎您：{{ uname }}</span>
+                        <a href="/user/sign_out/">退出</a>
+                    {% else %}
+                        <a href="/user/login/">登录</a>
+                    {% endif %}
+					<span>|</span>
+					<a href="/user/register/">注册</a>
+				</div>
+				<div class="user_link fl">
+					<span>|</span>
+					<a href="/user/user_center_info">用户中心</a>
+					<span>|</span>
+					<a href="/shoppingCar/">我的购物车</a>
+					<span>|</span>
+					<a href="/order/orderinfo/">我的订单</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="search_bar clearfix">
+		<a href="/" class="logo fl"><img src="/static/images/tig.jpg"></a>
+		<div class="search_con fl">
+			<input type="text" class="input_text fl" name="" placeholder="搜索商品">
+			<input type="button" class="input_btn fr" name="" value="搜索">
+		</div>
+		<div class="guest_cart fr">
+			<a href="/shoppingCar/" class="cart_name fl">我的购物车</a>
+			<div class="goods_count fl" id="show_count">0</div>
+		</div>
+	</div>
+
+	<div class="navbar_con">
+		<div class="navbar clearfix">
+			<div class="subnav_con fl">
+				<h1>全部商品分类</h1>
+				<span></span>
+				<ul class="subnav">
+					<li><a href="#" class="fruit">战术上衣</a></li>
+					<li><a href="#" class="seafood">战术裤装</a></li>
+					<li><a href="#" class="meet">特战鞋靴</a></li>
+					<li><a href="#" class="egg">军用手表</a></li>
+					<li><a href="#" class="vegetables">战术包具</a></li>
+					<li><a href="#" class="ice">战术配饰</a></li>
+				</ul>
+			</div>
+{#			<ul class="navlist fl">#}
+{#				<li><a href="">首页</a></li>#}
+{#				<li class="interval">|</li>#}
+{#				<li><a href="">手机生鲜</a></li>#}
+{#				<li class="interval">|</li>#}
+{#				<li><a href="">抽奖</a></li>#}
+{#			</ul>#}
+		</div>
+	</div>
+
+	<div class="breadcrumb">
+		<a href="#">全部分类</a>
+		<span>></span>
+{#		<a href="#">新鲜水果</a>#}
+{#		<span>></span>#}
+		<a href="#">商品详情</a>
+	</div>
+
+	<div class="goods_detail_con clearfix">
+		<div class="goods_detail_pic fl"><img src="/static/{{ g.gpic }}"></div>
+
+		<div class="goods_detail_list fr">
+			<h3>{{ g.gtitle }}</h3>
+			<p>{{ g.gjianjie }}</p>
+			<div class="prize_bar">
+				<span class="show_pirze">¥<em id="gprice">{{ g.gprice }}</em></span>
+				<span class="show_unit">单  位：{{ g.gunit }}</span>
+			</div>
+			<div class="goods_num clearfix">
+				<div class="num_name fl">数 量：</div>
+				<div class="num_add fl">
+					<input type="text" class="num_show fl" value="1" disabled="true">
+					<a href="javascript:add();" class="add fr">+</a>
+					<a href="javascript:minus();" class="minus fr">-</a>
+				</div>
+			</div>
+			<div class="total">总价：<em id="gtotal"></em></div>
+			<div class="operate_btn">
+{#				<a href="/handel/buynow/{{g.id}}/" class="buy_btn">立即购买</a>#}
+
+{#                <a href="/order/orderinfo/?pdgid={{ g.id }}&num=" class="buy_btn">立即购买</a>#}
+                <a href="#" onclick="buynow()" class="buy_btn">立即购买</a>
+
+                <a href="#" onclick="addcar()" class="add_cart" id="add_cart">加入购物车</a>
+                <input type="hidden" class="pdgid" value="{{ g.id }}"/>
+
+			</div>
+		</div>
+	</div>
+
+	<div class="main_wrap clearfix">
+		<div class="l_wrap fl clearfix">
+			<div class="new_goods">
+				<h3>新品推荐</h3>
+				<ul>
+					<li>
+						<a href="#"><img src="/static/images/20180906081454373.jpg"></a>
+						<h4><a href="#">寒锋战术夹克秋冬新款轻薄软壳冲锋衣</a></h4>
+						<div class="prize">￥399</div>
+					</li>
+					<li>
+						<a href="#"><img src="/static/images/20170103021335674.jpg"></a>
+						<h4><a href="#">寒锋战术软壳长裤</a></h4>
+						<div class="prize">￥399</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="r_wrap fr clearfix">
+			<ul class="detail_tab clearfix">
+				<li class="active">商品介绍</li>
+				<li>评论</li>
+			</ul>
+
+			<div class="tab_content">
+				<dl>
+					<dt>商品详情：</dt>
+					<dd>{{ g.gcontent }} </dd>
+				</dl>
+			</div>
+
+		</div>
+	</div>
+
+	<div class="footer">
+		<div class="foot_link">
+			<a href="#">关于我们</a>
+			<span>|</span>
+			<a href="#">联系我们</a>
+			<span>|</span>
+			<a href="#">招聘人才</a>
+			<span>|</span>
+			<a href="#">友情链接</a>
+		</div>
+		<p>CopyRight © 2016 北京军品行有限公司 All Rights Reserved</p>
+		<p>电话：010-****888    京ICP备*******8号</p>
+	</div>
+{#    加入购物车动画#}
+	<div class="add_jump"></div>
+
+{#	<script type="text/javascript" src="js/jquery-1.12.2.js"></script>#}
+	<script type="text/javascript">
+		var $add_x = $('#add_cart').offset().top;
+		var $add_y = $('#add_cart').offset().left;
+
+		var $to_x = $('#show_count').offset().top;
+		var $to_y = $('#show_count').offset().left;
+
+		$(".add_jump").css({'left':$add_y+80,'top':$add_x+10,'display':'block'})
+		$('#add_cart').click(function(){
+			$(".add_jump").stop().animate({
+				'left': $to_y+7,
+				'top': $to_x+7},
+				"fast", function() {
+					$(".add_jump").fadeOut('fast',function(){
+						$('#show_count').html(1);
+					});
+
+			});
+		})
+	</script>
+
+</body>
+</html>

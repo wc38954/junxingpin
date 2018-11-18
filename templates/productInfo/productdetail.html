@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ProductDetil</title>
+</head>
+<body>
+    <h1>ProductInfoMation</h1>
+    <div>{{types}}</div>
+    <form method="post" action="">
+        {% csrf_token%}
+        <table>{{form.as_table}}</table>
+            <input type="submit" name="Creat" value="新增产品">
+            <input type="submit" name="Modify" value="修改信息">
+            <input type="submit" name="addCar" value="加入购物车">
+            <input type="submit" name="buyNow" value="立即购买">
+            <input type="submit" name="myCar" value="我的购物车">
+    </form>
+</body>
+</html>
